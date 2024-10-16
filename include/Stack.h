@@ -1,49 +1,31 @@
 #ifndef STACK_H
 #define STACK_H
 
-#include <iostream>;
+#include <iostream>
 using namespace std;
 
-struct Node{
-int data;
-Node* next;
+struct Node {
+    int data;
+    Node* next;
 };
 
-class Stack
-{
+class Stack {
 private:
     Node* topNode;
 public:
-    Stack():topNode(nullptr){}
-    void push(int value){
+    Stack() : topNode(nullptr) {}
+
+    ~Stack() {
+        while (!isEmpty()) {
+            pop();
+        }
+    }
+
+    void push(int value) {
         Node* newNode = new Node();
         newNode->data = value;
         newNode->next = topNode;
         topNode = newNode;
     }
 
-    void pop(){
-    if(isEmpty()){
-       cout<<"el stack esta vacío"<<endl;
-        return;
-       }
-    Node* temp = topNode;
-    topNode = topNode->next;
-    delete temp;
-
-    }
-    int top(){
-     if(isEmpty()){
-        cout<<"El stack está vacío";
-        return -1;
-
-     }
-       return topNode -> data;
-    }
-    bool isEmpty(){
-        return topNode == nullptr;
-    }
-
-};
-
-#endif // STACK_H
+    void
